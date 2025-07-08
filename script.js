@@ -106,6 +106,9 @@ let currentLanguage = 'ko';
 document.addEventListener('DOMContentLoaded', function() {
     initializeEventListeners();
     updateLanguage();
+    
+    // Lambda 함수 워밍업 (콜드 스타트 방지)
+    warmupAPIs();
 });
 
 // 이벤트 리스너 초기화
@@ -353,6 +356,81 @@ window.debugAPI = {
     endpoints: API_ENDPOINTS,
     currentLang: () => currentLanguage
 };
+
+// Lambda 함수 워밍업 (콜드 스타트 방지)
+async function warmupAPIs() {
+    console.log('🔥 Lambda 함수 워밍업을 시작합니다...');
+    
+    const warmupPromises = [
+        warmupAPI('ko', '안녕하세요'),
+        warmupAPI('en', 'Hello')
+    ];
+    
+    try {
+        const results = await Promise.allSettled(warmupPromises);
+        
+        let successCount = 0;
+        results.forEach((result, index) => {
+            const language = index === 0 ? '한국어' : '영어';
+            if (result.status === 'fulfilled') {
+                console.log(`✅ ${language} API 워밍업 성공`);
+                successCount++;
+            } else {
+                console.warn(`⚠️ ${language} API 워밍업 실패:`, result.reason?.message || '알 수 없는 오류');
+            }
+        });
+        
+        console.log(`🎯 워밍업 완료: ${successCount}/2개 API 준비됨`);
+        
+        // 워밍업 완료 후 UI에 간단한 표시 (선택사항)
+        if (successCount > 0) {
+            showWarmupComplete();
+        }
+        
+    } catch (error) {
+        console.error('워밍업 중 예상치 못한 오류:', error);
+    }
+}
+
+// 개별 API 워밍업
+async function warmupAPI(language, sampleText) {
+    const endpoint = API_ENDPOINTS[language];
+    
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: sampleText })
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.error) {
+        throw new Error(data.error);
+    }
+
+    return data;
+}
+
+// 워밍업 완료 표시 (선택사항)
+function showWarmupComplete() {
+    // 브라우저 제목에 준비 완료 표시
+    const originalTitle = document.title;
+    document.title = '🔥 준비완료 - ' + originalTitle;
+    
+    // 3초 후 원래 제목으로 복원
+    setTimeout(() => {
+        document.title = originalTitle;
+    }, 3000);
+    
+    // 콘솔에 준비 완료 메시지
+    console.log('🚀 모든 API가 준비되었습니다! 빠른 응답을 기대하세요.');
+}
 
 console.log('🎭 통합 감정 분석 API 데모가 로드되었습니다!');
 console.log('디버깅: window.debugAPI 객체를 사용해보세요.');
