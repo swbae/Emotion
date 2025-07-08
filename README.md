@@ -12,27 +12,13 @@
 
 ## 🚀 사용 방법
 
-### 1. 웹 서버 실행
-
-```bash
-# 간단한 HTTP 서버 실행 (Python)
-cd web
-python3 -m http.server 8000
-
-# 또는 Node.js 사용 시
-npx http-server . -p 8000
-
-# 또는 PHP 사용 시
-php -S localhost:8000
-```
-
-### 2. 브라우저에서 접속
+### 1. 브라우저에서 접속
 
 ```
-http://localhost:8000
+https://swbae.github.io/Emotion/
 ```
 
-### 3. 데모 사용
+### 2. 데모 사용
 
 1. **언어 선택**: 🇰🇷 한국어 또는 🇺🇸 영어 선택
 2. **텍스트 입력**: 직접 입력하거나 샘플 버튼 클릭
@@ -60,6 +46,7 @@ http://localhost:8000
 ## 🔧 API 엔드포인트
 
 ### 한국어 감정 분석
+
 ```
 POST https://5e9feeazo0.execute-api.ap-northeast-2.amazonaws.com/prod/emotion/ko
 
@@ -70,6 +57,7 @@ Content-Type: application/json
 ```
 
 ### 영어 감정 분석
+
 ```
 POST https://5e9feeazo0.execute-api.ap-northeast-2.amazonaws.com/prod/emotion/en
 
@@ -107,6 +95,7 @@ Content-Type: application/json
 ## 🎯 지원 감정
 
 ### 한국어 (6개)
+
 - **happy** (행복): 기쁨, 즐거움, 만족감
 - **sad** (슬픔): 우울, 슬픔, 낙담
 - **angry** (분노): 화남, 짜증, 분개
@@ -115,6 +104,7 @@ Content-Type: application/json
 - **heartache** (상처): 마음의 아픔, 배신감, 실망
 
 ### 영어 (28개)
+
 admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity, desire, disappointment, disapproval, disgust, embarrassment, excitement, fear, gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief, remorse, sadness, surprise, neutral
 
 ## 🛠️ 기술 스택
@@ -122,7 +112,7 @@ admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity,
 - **Frontend**: HTML5, CSS3, Vanilla JavaScript
 - **Backend**: AWS Lambda (서버리스)
 - **API Gateway**: RESTful API
-- **AI Models**: 
+- **AI Models**:
   - 한국어: KoELECTRA
   - 영어: RoBERTa-GoEmotions
 - **Infrastructure**: AWS ECR, CloudWatch
@@ -133,16 +123,16 @@ admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity,
 
 ```javascript
 // 한국어 테스트
-debugAPI.testKorean()
+debugAPI.testKorean();
 
 // 영어 테스트
-debugAPI.testEnglish()
+debugAPI.testEnglish();
 
 // 현재 API 엔드포인트 확인
-debugAPI.endpoints
+debugAPI.endpoints;
 
 // 현재 선택된 언어 확인
-debugAPI.currentLang()
+debugAPI.currentLang();
 ```
 
 ## 🌐 CORS 설정
@@ -177,4 +167,4 @@ debugAPI.currentLang()
 
 ---
 
-**Happy Analyzing! 🎭✨** 
+**Happy Analyzing! 🎭✨**
