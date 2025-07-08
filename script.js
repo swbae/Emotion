@@ -18,10 +18,10 @@ const EMOTION_ICONS = {
     // 영어 감정
     'love': '💖',
     'joy': '😄',
-    'admiration': '😍',
+    'admiration': '👏',
     'excitement': '🤩',
     'gratitude': '🙏',
-    'amusement': '😆',
+    'amusement': '😂',
     'approval': '👍',
     'caring': '🤗',
     'optimism': '😌',
@@ -36,13 +36,13 @@ const EMOTION_ICONS = {
     'fear': '😱',
     'nervousness': '😬',
     'sadness': '😭',
-    'anger': '😠',
+    'anger': '😡',
     'annoyance': '😤',
     'disappointment': '😞',
     'disapproval': '👎',
     'disgust': '🤢',
     'embarrassment': '😳',
-    'grief': '😰',
+    'grief': '😢',
     'remorse': '😔'
 };
 
@@ -129,7 +129,7 @@ function initializeEventListeners() {
     });
 
     // 샘플 텍스트 버튼 이벤트
-    document.querySelectorAll('.sample-btn').forEach(btn => {
+    document.querySelectorAll('.sample-item').forEach(btn => {
         btn.addEventListener('click', function() {
             const sampleText = this.getAttribute('data-text');
             elements.textInput.value = sampleText;
@@ -226,7 +226,7 @@ function showResult(result) {
     // 감정 아이콘과 라벨
     const emotionIcon = EMOTION_ICONS[result.predicted_emotion] || '🎭';
     const emotionLabel = currentLanguage === 'ko' ? 
-        (EMOTION_TRANSLATIONS[result.predicted_emotion] || result.predicted_emotion) :
+        `${EMOTION_TRANSLATIONS[result.predicted_emotion] || result.predicted_emotion}(${result.predicted_emotion})` :
         result.predicted_emotion;
 
     document.getElementById('emotionIcon').textContent = emotionIcon;
@@ -267,7 +267,7 @@ function renderEmotionChart(emotions) {
         const emotionName = document.createElement('span');
         emotionName.className = 'emotion-name';
         emotionName.textContent = currentLanguage === 'ko' ? 
-            (EMOTION_TRANSLATIONS[emotion] || emotion) : emotion;
+            `${EMOTION_TRANSLATIONS[emotion] || emotion}(${emotion})` : emotion;
 
         const barContainer = document.createElement('div');
         barContainer.className = 'bar-container';

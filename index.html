@@ -27,105 +27,217 @@
                 </label>
             </div>
 
-            <!-- 텍스트 입력 영역 -->
-            <div class="input-section">
-                <textarea 
-                    id="textInput" 
-                    placeholder="분석할 텍스트를 입력하세요..."
-                    rows="4"
-                ></textarea>
-                <button id="analyzeBtn" class="analyze-btn">
-                    <span class="btn-text">감정 분석하기</span>
-                    <span class="loading-spinner" style="display: none;">⏳</span>
-                </button>
-            </div>
-
-            <!-- 샘플 텍스트 버튼들 -->
-            <div class="samples-section">
-                <h3>📝 샘플 텍스트</h3>
-                
-                <!-- 한국어 샘플 -->
-                <div id="koreanSamples" class="samples-grid">
-                    <h4>🇰🇷 한국어 샘플</h4>
-                    <div class="sample-buttons">
-                        <button class="sample-btn happy" data-text="오늘 정말 기분이 좋아요! 최고의 하루예요!">
-                            😊 행복한 텍스트
-                        </button>
-                        <button class="sample-btn sad" data-text="너무 슬퍼요. 마음이 아파서 견딜 수가 없어요.">
-                            😢 슬픈 텍스트
-                        </button>
-                        <button class="sample-btn angry" data-text="이런 일이 또 생기다니! 정말 화가 나서 견딜 수가 없어요.">
-                            😡 화난 텍스트
-                        </button>
-                        <button class="sample-btn anxious" data-text="내일 발표가 걱정돼요. 잘할 수 있을지 두려워요.">
-                            😰 불안한 텍스트
-                        </button>
-                        <button class="sample-btn embarrassed" data-text="갑자기 이런 일이 생겨서 완전히 당황스러워요. 어떻게 해야 할지 모르겠어요.">
-                            😳 당황한 텍스트
+            <!-- 메인 콘텐츠 영역 -->
+            <div class="main-content">
+                <!-- 좌측: 입력 및 결과 영역 -->
+                <div class="left-panel">
+                    <!-- 텍스트 입력 영역 -->
+                    <div class="input-section">
+                        <textarea 
+                            id="textInput" 
+                            placeholder="분석할 텍스트를 입력하세요..."
+                            rows="4"
+                        ></textarea>
+                        <button id="analyzeBtn" class="analyze-btn">
+                            <span class="btn-text">감정 분석하기</span>
+                            <span class="loading-spinner" style="display: none;">⏳</span>
                         </button>
                     </div>
-                </div>
 
-                <!-- 영어 샘플 -->
-                <div id="englishSamples" class="samples-grid" style="display: none;">
-                    <h4>🇺🇸 영어 샘플</h4>
-                    <div class="sample-buttons">
-                        <button class="sample-btn love" data-text="I love this movie! It's absolutely amazing and wonderful!">
-                            💖 Love & Joy
-                        </button>
-                        <button class="sample-btn sad" data-text="I'm so sad about what happened today. It breaks my heart.">
-                            😢 Sadness
-                        </button>
-                        <button class="sample-btn angry" data-text="This is so frustrating! I can't stand it anymore!">
-                            😡 Anger
-                        </button>
-                        <button class="sample-btn fear" data-text="I'm really scared about the exam tomorrow. What if I fail?">
-                            😱 Fear
-                        </button>
-                        <button class="sample-btn surprise" data-text="What a wonderful surprise! I never expected this amazing gift!">
-                            😲 Surprise
-                        </button>
-                    </div>
-                </div>
-            </div>
+                    <!-- 결과 표시 영역 -->
+                    <div id="resultSection" class="result-section" style="display: none;">
+                        <h3>📊 분석 결과</h3>
+                        
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div class="predicted-emotion">
+                                    <span class="emotion-icon" id="emotionIcon">🎭</span>
+                                    <div class="emotion-info">
+                                        <span class="emotion-label" id="emotionLabel">감정</span>
+                                        <span class="confidence" id="confidenceValue">0%</span>
+                                    </div>
+                                </div>
+                                <div class="model-info">
+                                    <span class="model-name" id="modelName">모델</span>
+                                    <span class="processing-time" id="processingTime">0ms</span>
+                                </div>
+                            </div>
 
-            <!-- 결과 표시 영역 -->
-            <div id="resultSection" class="result-section" style="display: none;">
-                <h3>📊 분석 결과</h3>
-                
-                <div class="result-card">
-                    <div class="result-header">
-                        <div class="predicted-emotion">
-                            <span class="emotion-icon" id="emotionIcon">🎭</span>
-                            <div class="emotion-info">
-                                <span class="emotion-label" id="emotionLabel">감정</span>
-                                <span class="confidence" id="confidenceValue">0%</span>
+                            <div class="input-text" id="analyzedText">
+                                분석된 텍스트가 여기에 표시됩니다.
+                            </div>
+
+                            <div class="emotions-chart">
+                                <h4>🎯 모든 감정 점수</h4>
+                                <div id="emotionsChart" class="chart-container">
+                                    <!-- 감정 차트가 여기에 표시됩니다 -->
+                                </div>
                             </div>
                         </div>
-                        <div class="model-info">
-                            <span class="model-name" id="modelName">모델</span>
-                            <span class="processing-time" id="processingTime">0ms</span>
-                        </div>
                     </div>
 
-                    <div class="input-text" id="analyzedText">
-                        분석된 텍스트가 여기에 표시됩니다.
-                    </div>
-
-                    <div class="emotions-chart">
-                        <h4>🎯 모든 감정 점수</h4>
-                        <div id="emotionsChart" class="chart-container">
-                            <!-- 감정 차트가 여기에 표시됩니다 -->
+                    <!-- 에러 메시지 -->
+                    <div id="errorSection" class="error-section" style="display: none;">
+                        <div class="error-card">
+                            <h3>❌ 오류 발생</h3>
+                            <p id="errorMessage">오류 메시지가 여기에 표시됩니다.</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 에러 메시지 -->
-            <div id="errorSection" class="error-section" style="display: none;">
-                <div class="error-card">
-                    <h3>❌ 오류 발생</h3>
-                    <p id="errorMessage">오류 메시지가 여기에 표시됩니다.</p>
+                <!-- 우측: 샘플 텍스트 리스트 -->
+                <div class="right-panel">
+                    <div class="samples-section">
+                        <!-- 한국어 샘플 -->
+                        <div id="koreanSamples" class="samples-list">
+                            <h4>🇰🇷 한국어 샘플</h4>
+                            <div class="sample-list">
+                                <button class="sample-item happy" data-text="오늘 정말 기분이 좋아요! 최고의 하루예요!">
+                                    <span class="sample-icon">😊</span>
+                                    <span class="sample-text">행복한 텍스트</span>
+                                </button>
+                                <button class="sample-item sad" data-text="너무 슬퍼요. 마음이 아파서 견딜 수가 없어요.">
+                                    <span class="sample-icon">😢</span>
+                                    <span class="sample-text">슬픈 텍스트</span>
+                                </button>
+                                <button class="sample-item angry" data-text="이런 일이 또 생기다니! 정말 화가 나서 견딜 수가 없어요.">
+                                    <span class="sample-icon">😡</span>
+                                    <span class="sample-text">화난 텍스트</span>
+                                </button>
+                                <button class="sample-item anxious" data-text="내일 발표가 걱정돼요. 잘할 수 있을지 두려워요.">
+                                    <span class="sample-icon">😰</span>
+                                    <span class="sample-text">불안한 텍스트</span>
+                                </button>
+                                <button class="sample-item embarrassed" data-text="갑자기 이런 일이 생겨서 완전히 당황스러워요. 어떻게 해야 할지 모르겠어요.">
+                                    <span class="sample-icon">😳</span>
+                                    <span class="sample-text">당황한 텍스트</span>
+                                </button>
+                                <button class="sample-item heartache" data-text="믿었던 사람에게 배신당해서 마음이 너무 아파요. 실망스럽고 상처받았어요.">
+                                    <span class="sample-icon">💔</span>
+                                    <span class="sample-text">상처받은 텍스트</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 영어 샘플 -->
+                        <div id="englishSamples" class="samples-list" style="display: none;">
+                            <h4>🇺🇸 영어 샘플 (28개 감정)</h4>
+                            <div class="sample-list">
+                                <button class="sample-item admiration" data-text="I really admire how you handled that difficult situation with such grace and wisdom.">
+                                    <span class="sample-icon">👏</span>
+                                    <span class="sample-text">Admiration</span>
+                                </button>
+                                <button class="sample-item amusement" data-text="That joke was hilarious! I can't stop laughing, it's so funny and clever!">
+                                    <span class="sample-icon">😂</span>
+                                    <span class="sample-text">Amusement</span>
+                                </button>
+                                <button class="sample-item anger" data-text="This is absolutely infuriating! I can't believe they would do something so irresponsible!">
+                                    <span class="sample-icon">😡</span>
+                                    <span class="sample-text">Anger</span>
+                                </button>
+                                <button class="sample-item annoyance" data-text="It's really annoying when people don't follow simple instructions. This is getting on my nerves.">
+                                    <span class="sample-icon">😤</span>
+                                    <span class="sample-text">Annoyance</span>
+                                </button>
+                                <button class="sample-item approval" data-text="I completely agree with your decision. That's exactly the right approach to take.">
+                                    <span class="sample-icon">👍</span>
+                                    <span class="sample-text">Approval</span>
+                                </button>
+                                <button class="sample-item caring" data-text="I'm worried about you. Please take care of yourself and let me know if you need anything.">
+                                    <span class="sample-icon">🤗</span>
+                                    <span class="sample-text">Caring</span>
+                                </button>
+                                <button class="sample-item confusion" data-text="I'm completely confused by these instructions. What exactly am I supposed to do here?">
+                                    <span class="sample-icon">😕</span>
+                                    <span class="sample-text">Confusion</span>
+                                </button>
+                                <button class="sample-item curiosity" data-text="I'm really curious about how this works. Can you explain the process to me?">
+                                    <span class="sample-icon">🤔</span>
+                                    <span class="sample-text">Curiosity</span>
+                                </button>
+                                <button class="sample-item desire" data-text="I really want to travel to Japan someday. It's been my dream destination for years.">
+                                    <span class="sample-icon">😍</span>
+                                    <span class="sample-text">Desire</span>
+                                </button>
+                                <button class="sample-item disappointment" data-text="I'm so disappointed that the concert was cancelled. I was really looking forward to it.">
+                                    <span class="sample-icon">😞</span>
+                                    <span class="sample-text">Disappointment</span>
+                                </button>
+                                <button class="sample-item disapproval" data-text="I strongly disagree with that policy. It's unfair and poorly thought out.">
+                                    <span class="sample-icon">👎</span>
+                                    <span class="sample-text">Disapproval</span>
+                                </button>
+                                <button class="sample-item disgust" data-text="That's absolutely disgusting! I can't believe anyone would eat something like that.">
+                                    <span class="sample-icon">🤢</span>
+                                    <span class="sample-text">Disgust</span>
+                                </button>
+                                <button class="sample-item embarrassment" data-text="I'm so embarrassed about what happened at the meeting. I wish I could just disappear.">
+                                    <span class="sample-icon">😳</span>
+                                    <span class="sample-text">Embarrassment</span>
+                                </button>
+                                <button class="sample-item excitement" data-text="I'm so excited about the vacation! I can't wait to see all the amazing places we'll visit!">
+                                    <span class="sample-icon">🤩</span>
+                                    <span class="sample-text">Excitement</span>
+                                </button>
+                                <button class="sample-item fear" data-text="I'm really scared about the surgery tomorrow. What if something goes wrong?">
+                                    <span class="sample-icon">😱</span>
+                                    <span class="sample-text">Fear</span>
+                                </button>
+                                <button class="sample-item gratitude" data-text="Thank you so much for your help! I'm incredibly grateful for everything you've done.">
+                                    <span class="sample-icon">🙏</span>
+                                    <span class="sample-text">Gratitude</span>
+                                </button>
+                                <button class="sample-item grief" data-text="I'm still grieving the loss of my beloved pet. The grief is overwhelming and I can't stop thinking about all our memories together.">
+                                    <span class="sample-icon">😢</span>
+                                    <span class="sample-text">Grief</span>
+                                </button>
+                                <button class="sample-item joy" data-text="I'm filled with joy! This is the happiest day of my life!">
+                                    <span class="sample-icon">😄</span>
+                                    <span class="sample-text">Joy</span>
+                                </button>
+                                <button class="sample-item love" data-text="I love you more than words can express. You make my life complete.">
+                                    <span class="sample-icon">💖</span>
+                                    <span class="sample-text">Love</span>
+                                </button>
+                                <button class="sample-item nervousness" data-text="I'm so nervous about the job interview. My hands are shaking and I can't calm down.">
+                                    <span class="sample-icon">😬</span>
+                                    <span class="sample-text">Nervousness</span>
+                                </button>
+                                <button class="sample-item optimism" data-text="I'm confident that everything will work out fine. Good things are coming our way!">
+                                    <span class="sample-icon">😌</span>
+                                    <span class="sample-text">Optimism</span>
+                                </button>
+                                <button class="sample-item pride" data-text="I'm so proud of my daughter for graduating with honors. She worked so hard for this.">
+                                    <span class="sample-icon">😎</span>
+                                    <span class="sample-text">Pride</span>
+                                </button>
+                                <button class="sample-item realization" data-text="Oh wow, I just realized what you meant! Now everything makes perfect sense.">
+                                    <span class="sample-icon">💡</span>
+                                    <span class="sample-text">Realization</span>
+                                </button>
+                                <button class="sample-item relief" data-text="What a relief! I was so worried, but everything turned out okay in the end.">
+                                    <span class="sample-icon">😅</span>
+                                    <span class="sample-text">Relief</span>
+                                </button>
+                                <button class="sample-item remorse" data-text="I deeply regret what I said. I'm sorry for hurting your feelings, it was wrong of me.">
+                                    <span class="sample-icon">😔</span>
+                                    <span class="sample-text">Remorse</span>
+                                </button>
+                                <button class="sample-item sadness" data-text="I'm feeling so sad and empty today. Everything just seems overwhelming right now.">
+                                    <span class="sample-icon">😭</span>
+                                    <span class="sample-text">Sadness</span>
+                                </button>
+                                <button class="sample-item surprise" data-text="What a wonderful surprise! I never expected such an amazing gift!">
+                                    <span class="sample-icon">😲</span>
+                                    <span class="sample-text">Surprise</span>
+                                </button>
+                                <button class="sample-item neutral" data-text="The weather is okay today. Nothing particularly special happening, just a regular day.">
+                                    <span class="sample-icon">😐</span>
+                                    <span class="sample-text">Neutral</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
