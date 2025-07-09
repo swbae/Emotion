@@ -6,7 +6,7 @@
 
 - **이중 언어 지원**: 한국어(KoELECTRA) & 영어(RoBERTa-GoEmotions)
 - **실시간 감정 분석**: AWS Lambda 기반 서버리스 API
-- **샘플 텍스트**: 각 언어별 5개씩 준비된 테스트 샘플
+- **샘플 텍스트**: 각 언어별 감정별로 준비된 테스트 샘플
 - **시각적 결과**: 감정 점수 차트와 직관적인 이모지 표시
 - **반응형 디자인**: 모바일과 데스크톱 지원
 
@@ -34,14 +34,38 @@ https://swbae.github.io/Emotion/
 3. **분노**: "이런 일이 또 생기다니! 정말 화가 나서 견딜 수가 없어요."
 4. **불안**: "내일 발표가 걱정돼요. 잘할 수 있을지 두려워요."
 5. **당황**: "갑자기 이런 일이 생겨서 완전히 당황스러워요. 어떻게 해야 할지 모르겠어요."
+6. **상처**: "믿었던 사람에게 배신당해서 마음이 너무 아파요. 실망스럽고 상처받았어요."
 
-### 🇺🇸 영어 샘플 (28개 감정 중 5가지)
+### 🇺🇸 영어 샘플 (28개 감정)
 
-1. **Love & Joy**: "I love this movie! It's absolutely amazing and wonderful!"
-2. **Sadness**: "I'm so sad about what happened today. It breaks my heart."
-3. **Anger**: "This is so frustrating! I can't stand it anymore!"
-4. **Fear**: "I'm really scared about the exam tomorrow. What if I fail?"
-5. **Surprise**: "What a wonderful surprise! I never expected this amazing gift!"
+1. **Admiration**: "I really admire how you handled that difficult situation with such grace and wisdom."
+2. **Amusement**: "That joke was hilarious! I can't stop laughing, it's so funny and clever!"
+3. **Anger**: "This is absolutely infuriating! I can't believe they would do something so irresponsible!"
+4. **Annoyance**: "It's really annoying when people don't follow simple instructions. This is getting on my nerves."
+5. **Approval**: "I completely agree with your decision. That's exactly the right approach to take."
+6. **Caring**: "I'm worried about you. Please take care of yourself and let me know if you need anything."
+7. **Confusion**: "I'm completely confused by these instructions. What exactly am I supposed to do here?"
+8. **Curiosity**: "I'm really curious about how this works. Can you explain the process to me?"
+9. **Desire**: "I really want to travel to Japan someday. It's been my dream destination for years."
+10. **Disappointment**: "I'm so disappointed that the concert was cancelled. I was really looking forward to it."
+11. **Disapproval**: "I strongly disagree with that policy. It's unfair and poorly thought out."
+12. **Disgust**: "That's absolutely disgusting! I can't believe anyone would eat something like that."
+13. **Embarrassment**: "I'm so embarrassed about what happened at the meeting. I wish I could just disappear."
+14. **Excitement**: "I'm so excited about the vacation! I can't wait to see all the amazing places we'll visit!"
+15. **Fear**: "I'm really scared about the surgery tomorrow. What if something goes wrong?"
+16. **Gratitude**: "Thank you so much for your help! I'm incredibly grateful for everything you've done."
+17. **Grief**: "I'm still grieving the loss of my beloved pet. The grief is overwhelming and I can't stop thinking about all our memories together."
+18. **Joy**: "I'm filled with joy! This is the happiest day of my life!"
+19. **Love**: "I love you more than words can express. You make my life complete."
+20. **Nervousness**: "I'm so nervous about the job interview. My hands are shaking and I can't calm down."
+21. **Optimism**: "I'm confident that everything will work out fine. Good things are coming our way!"
+22. **Pride**: "I'm so proud of my daughter for graduating with honors. She worked so hard for this."
+23. **Realization**: "Oh wow, I just realized what you meant! Now everything makes perfect sense."
+24. **Relief**: "What a relief! I was so worried, but everything turned out okay in the end."
+25. **Remorse**: "I deeply regret what I said. I'm sorry for hurting your feelings, it was wrong of me."
+26. **Sadness**: "I feel so sad and empty inside. Nothing seems to bring me joy anymore."
+27. **Surprise**: "I can't believe this amazing surprise! This is absolutely unexpected and wonderful!"
+28. **Neutral**: "The weather forecast predicts rain tomorrow morning."
 
 ## 🔧 API 엔드포인트
 
@@ -117,53 +141,15 @@ admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity,
   - 영어: RoBERTa-GoEmotions
 - **Infrastructure**: AWS ECR, CloudWatch
 
-## 🔍 디버깅 도구
-
-개발자 콘솔에서 다음 명령으로 테스트할 수 있습니다:
-
-```javascript
-// 한국어 테스트
-debugAPI.testKorean();
-
-// 영어 테스트
-debugAPI.testEnglish();
-
-// 현재 API 엔드포인트 확인
-debugAPI.endpoints;
-
-// 현재 선택된 언어 확인
-debugAPI.currentLang();
-```
-
-## 🌐 CORS 설정
-
-웹 브라우저에서 API를 직접 호출하므로 CORS가 활성화되어 있습니다. 로컬 개발 시에도 문제없이 작동합니다.
-
-## 📱 반응형 지원
-
-- **데스크톱**: 최적화된 레이아웃
-- **태블릿**: 중간 크기 화면 지원
-- **모바일**: 터치 친화적 인터페이스
-
-## 🎨 UI/UX 특징
-
-- **아름다운 그라디언트**: 현대적인 디자인
-- **감정별 색상**: 각 감정마다 고유한 색상
-- **애니메이션**: 부드러운 페이드인 효과
-- **로딩 스피너**: 분석 중 시각적 피드백
-- **에러 처리**: 사용자 친화적 오류 메시지
-
 ## 🚨 주의사항
 
 1. **네트워크 연결**: 인터넷 연결이 필요합니다
-2. **API 제한**: 과도한 요청 시 제한될 수 있습니다
-3. **브라우저 지원**: 모던 브라우저에서 최적화됨
+2. **API 제한**: 요금이 발생하기 때문에 테스트 용도 외 사용 금지
 
 ## 📈 성능
 
-- **응답 속도**: 평균 40-100ms
-- **정확도**: 한국어 99%+, 영어 80%+
-- **가용성**: 99.9% (AWS Lambda 기반)
+- **응답 속도**: 평균 100-200ms
+- **응답 속도(Cold Start)**: 평균 10s 이내
 
 ---
 
