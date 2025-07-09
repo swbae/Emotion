@@ -100,7 +100,7 @@ const elements = {
 };
 
 // 현재 선택된 언어
-let currentLanguage = 'ko';
+let currentLanguage = 'en';
 
 // 초기화
 document.addEventListener('DOMContentLoaded', function() {
