@@ -277,43 +277,23 @@ body {
     font-weight: 500;
 }
 
-/* 감정별 좌측 보더 색상 */
-.sample-item.happy { border-left: 3px solid #28a745; }
-.sample-item.sad { border-left: 3px solid #6f42c1; }
-.sample-item.angry { border-left: 3px solid #dc3545; }
-.sample-item.anxious { border-left: 3px solid #fd7e14; }
-.sample-item.embarrassed { border-left: 3px solid #e83e8c; }
-.sample-item.heartache { border-left: 3px solid #495057; }
-
-/* 영어 감정 색상 */
-.sample-item.admiration { border-left: 3px solid #6f42c1; }
-.sample-item.amusement { border-left: 3px solid #ffc107; }
+/* 감정별 좌측 보더 색상 (korean-emotion-kluebert-v2) */
+.sample-item.joy { border-left: 3px solid #28a745; }
+.sample-item.sadness { border-left: 3px solid #6f42c1; }
 .sample-item.anger { border-left: 3px solid #dc3545; }
-.sample-item.annoyance { border-left: 3px solid #fd7e14; }
-.sample-item.approval { border-left: 3px solid #28a745; }
-.sample-item.caring { border-left: 3px solid #20c997; }
-.sample-item.confusion { border-left: 3px solid #6c757d; }
-.sample-item.curiosity { border-left: 3px solid #17a2b8; }
-.sample-item.desire { border-left: 3px solid #e91e63; }
-.sample-item.disappointment { border-left: 3px solid #343a40; }
-.sample-item.disapproval { border-left: 3px solid #6c757d; }
-.sample-item.disgust { border-left: 3px solid #795548; }
-.sample-item.embarrassment { border-left: 3px solid #e83e8c; }
-.sample-item.excitement { border-left: 3px solid #ff6b6b; }
 .sample-item.fear { border-left: 3px solid #795548; }
-.sample-item.gratitude { border-left: 3px solid #4caf50; }
-.sample-item.grief { border-left: 3px solid #424242; }
-.sample-item.joy { border-left: 3px solid #ffeb3b; }
-.sample-item.love { border-left: 3px solid #e91e63; }
-.sample-item.nervousness { border-left: 3px solid #ff9800; }
-.sample-item.optimism { border-left: 3px solid #8bc34a; }
-.sample-item.pride { border-left: 3px solid #9c27b0; }
-.sample-item.realization { border-left: 3px solid #3f51b5; }
-.sample-item.relief { border-left: 3px solid #4caf50; }
-.sample-item.remorse { border-left: 3px solid #607d8b; }
-.sample-item.sadness { border-left: 3px solid #2196f3; }
 .sample-item.surprise { border-left: 3px solid #17a2b8; }
+.sample-item.disgust { border-left: 3px solid #795548; }
 .sample-item.neutral { border-left: 3px solid #9e9e9e; }
+
+/* 영어 전용 색상 (한국어와 중복되지만 다른 색상) */
+#englishSamples .sample-item.joy { border-left: 3px solid #ffeb3b; }
+#englishSamples .sample-item.sadness { border-left: 3px solid #2196f3; }
+#englishSamples .sample-item.anger { border-left: 3px solid #ff5722; }
+#englishSamples .sample-item.fear { border-left: 3px solid #9e9e9e; }
+#englishSamples .sample-item.surprise { border-left: 3px solid #00bcd4; }
+#englishSamples .sample-item.disgust { border-left: 3px solid #8bc34a; }
+#englishSamples .sample-item.neutral { border-left: 3px solid #b0bec5; }
 
 /* 결과 섹션 */
 .result-section {
@@ -494,6 +474,19 @@ body {
 .footer-info {
     font-size: 0.9em;
     opacity: 0.8;
+}
+
+.model-link {
+    color: #fff;
+    text-decoration: underline;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.model-link:hover {
+    opacity: 1;
+    color: #a8c8ff;
+    text-decoration: underline;
 }
 
 /* 반응형 디자인 */
